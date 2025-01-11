@@ -1,7 +1,7 @@
 import os
 from shige import fetch_html, extract_poem_urls, fetch_poem_details
 
-file_path = "poems.csv"
+file_path = "高中文言文.csv"
 
 if __name__ == "__main__":
     if not os.path.exists(file_path):

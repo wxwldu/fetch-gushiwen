@@ -24,6 +24,24 @@ def fetch_html(u):
         print(f"Error fetching HTML content: {e}")
         return None
 
+def extract_poem_urls_categroy(html_detail):
+    soup = BeautifulSoup(html_detail, parser)
+    poems = []
+    for a_tag in soup.find_all("a", href=True):
+        href = a_tag["href"]
+        if href.startswith("/gushi/"):
+            poems.append(f"https://gushiwen.cn{href}")
+        elif href.startswith("https://gushiwen.cn/gushi/"):
+            poems.append(href)
+
+    return poems
+
+def get_title_categroy(u):
+    # soup = BeautifulSoup(html_detail, parser)
+    soup = BeautifulSoup(fetch_html(u), parser)
+    title_tag = soup.find("h1")
+    return title_tag.get_text()
+
 
 def extract_poem_urls(html_detail):
     soup = BeautifulSoup(html_detail, parser)
